@@ -25,3 +25,5 @@ const slides = [
     tagLine: "Autocollants <span>avec découpe laser sur mesure</span>",
   },
 ];
+
+export default slides
