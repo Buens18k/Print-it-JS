@@ -134,14 +134,3 @@ arrowRight.addEventListener("click", (event) => {
   dots[currentSlide].classList.add(`dot_selected`);
 });
 
-// // Pour être SUR que chaque dot contient son slide relatifs à l'index
-// // je récupère all dot et stock dans la variable dots
-// // j'parcours chaque objet dans ma liste dots
-// // Avec en paramètre
-// dots.forEach((dot, index) => {
-//   console.log(`Le Dot ${index + 1}:`, dots[index]);
-//   console.log(
-//     `Le Dot ${index + 1} contient le slide ${index + 1}:`,
-//     slides[index]
-//   );
-// });
