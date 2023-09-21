@@ -29,10 +29,21 @@ let maxSlides = slides.length;
 
 let currentSlide = 0;
 
-
+/********************
+ * Etape 3
+ * Ajoutez des bullet points au slider
+ * 
+ ********************/
 // j'appelle la fonction qui créer le dot en joignant le nom de la liste
 createDotCaroussel(slides);
 
+/********************
+ * 
+ * Etape 4
+ * Modifiez le slide au clic sur le bouton
+ * 
+ */
+// récupère tous les dots
 const dots = document.querySelectorAll(".dot");
 
 // j'applique le style au dot au chargement
@@ -40,6 +51,7 @@ dots[currentSlide].classList.add(`dot_selected`);
 // console.log(`le slide au chargement est le ${currentSlide}`)
 
 dots.forEach((dot, index) => {
+  // quant on click sur le bouton dot
   dot.addEventListener("click", (event) => {
     // j'efface la class a tous les dot
     removeStyleDot(dots, dot);
@@ -49,26 +61,40 @@ dots.forEach((dot, index) => {
     updateSlide(index);
   });
 });
-
+/*******************
+ * Etape 2
+ * Ajoutez des Event Listeners sur les flèches 
+ * 
+ *******************/
 
 // Récupère les flèches
 const arrowLeft = document.querySelector(".arrow_left");
 const arrowRight = document.querySelector(".arrow_right");
 
+/******************
+ * 
+ * Etape 5
+ * Mettez en place le défilement infini sur le carrousel 
+ * 
+ */
+
 // Ecoute évènement lors du click sur les flèches
 arrowLeft.addEventListener("click", (event) => {
+  // test du fonctionnement lors de l'event listeners
   console.log("fleche gauche");
   // Si au click l'index est égale à zéro
   // Et que l'index de ma Slide actuel est infèrieur à l'index de ma dernière Slide
   if (currentSlide === 0 && currentSlide < maxSlides - 1) {
     // alors tu passe à la max-slide - 1 pour retrouver le bonne index
     updateSlide(maxSlides - 1);
+    // test de fonctionnement
     console.log(
       `je suis revenu à l'index ${currentSlide} et actuellement sur le slide: ${maxSlides}`
     );
   } else {
     // je mets a jour mon index et je récupère le slide de l'index -1 pour MAJ l'image
     updateSlide(currentSlide - 1);
+    // test de fonctionnement
     console.log(`Je suis actuellement sur l'index :${currentSlide}`);
   }
   // Le dot ce mets à jour aussi
