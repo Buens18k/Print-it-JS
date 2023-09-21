@@ -25,18 +25,20 @@ const tagLineElement = document.querySelector(`#banner p`);
 
 const dotsDiv = document.querySelector(".dots");
 
-const maxSlides = slides.length;
+let maxSlides = slides.length;
 
 let currentSlide = 0;
 
+// function qui met a jour l'image et le tag en fonction de l'index donner
 function updateSlide(index) {
+  // stock l'index
   currentSlide = index;
-  // Mets a jour l'image
+  // Stock la liste et son index en cours
   const slide = slides[currentSlide];
-  // console.log(currentSlide);
+  //  MAJ image à afficher via directement la source
   imageElement.src = `./assets/images/slideshow/${slide.image}`;
+  // Vérification du dot relatifs au bon slide
   console.log(`Vous avez cliqué sur le dot qui représente le ${slide.image}`);
-
   // Mets a jour le tagline
   tagLineElement.innerHTML = slide.tagLine;
   // console.log(`Et voici son tag:  ${tagLineElement.innerHTML}`)
@@ -63,43 +65,73 @@ dots[currentSlide].classList.add(`dot_selected`);
 
 dots.forEach((dot, index) => {
   dot.addEventListener("click", (event) => {
-    // supprimer la classe .dot_selected de tous les dots
-    dots.forEach((otherDot) => {
-      otherDot.classList.remove(`dot_selected`);
-    });
-
-    // ajoute la class .dot_selected au dot cliqué
-    dot.classList.add(`dot_selected`);
-
+    // j'efface la class a tous les dot
+    removeStyleDot(dots, dot);
+    // puis je place le style au dot selectionner
+    addStyleDot(dot);
+    // je mets à jour mon index
     updateSlide(index);
   });
 });
+// une fonction qui enleve le style a l'élément qui n'est pas selectionner ou
+function removeStyleDot(liste, element) {
+  liste.forEach((element) => {
+    // supprimer la classe .dot_selected de tous les autres dots non selectionner
+    element.classList.remove(`dot_selected`);
+  });
+}
+
+function addStyleDot(element) {
+  // ajoute la class .dot_selected au dot cliqué
+  element.classList.add(`dot_selected`);
+}
 
 // Récupère les flèches
 const arrow_left = document.querySelector(".arrow_left");
-// console.log(arrow_left);
-
 const arrow_right = document.querySelector(".arrow_right");
-// console.log(arrow_right);
 
 // Ecoute évènement lors du click sur les flèches
 arrow_left.addEventListener("click", (event) => {
   console.log("fleche gauche");
-  if (currentSlide === 0) {
-    updateSlide(maxSlides -1)
+  // Si au click l'index est égale à zéro
+  // Et que l'index de ma Slide actuel est infèrieur à l'index de ma dernière Slide
+  if (currentSlide === 0 && currentSlide < maxSlides - 1) {
+    // alors tu passe à la max-slide - 1 pour retrouver le bonne index
+    updateSlide(maxSlides - 1);
+    console.log(
+      `je suis revenu à l'index ${currentSlide} et actuellement sur le slide: ${maxSlides}`
+    );
   } else {
-    updateSlide(currentSlide -1)
+    // je mets a jour mon index et je récupère le slide de l'index -1 pour MAJ l'image
+    updateSlide(currentSlide - 1);
+    console.log(`Je suis actuellement sur l'index :${currentSlide}`);
   }
-  
+  // Le dot ce mets à jour aussi
+  dots.forEach((dot) => {
+    // j'efface le style à tout les dots
+    removeStyleDot(dots, dot);
+  });
+  // Et je le replace sur celui en cours d'afficher
+  dots[currentSlide].classList.add(`dot_selected`);
 });
 
 arrow_right.addEventListener("click", (event) => {
   console.log("fleche droite");
-  if (currentSlide === maxSlides - 1) {
-    updateSlide(0)
+  // Si l'index du slide actuel est égale à l'index de la dernière slide
+  // et si l'index du slide actuel est supèrieur à zéro
+  if (currentSlide === maxSlides - 1 && currentSlide > 0) {
+    // je revient au début de la liste soit le 1er index
+    updateSlide(0);
+    console.log(`je suis revenu à l'index: ${currentSlide}`);
   } else {
-    updateSlide(currentSlide +1)
+    // je passe à l'index du slide suivant en MAJ image et tag
+    updateSlide(currentSlide + 1);
+    console.log(`je suis à l'index: ${currentSlide}`);
   }
+  dots.forEach((dot) => {
+    removeStyleDot(dots, dot);
+  });
+  dots[currentSlide].classList.add(`dot_selected`);
 });
 
 // // Pour être SUR que chaque dot contient son slide relatifs à l'index
