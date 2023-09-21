@@ -87,11 +87,11 @@ function addStyleDot(element) {
 }
 
 // Récupère les flèches
-const arrow_left = document.querySelector(".arrow_left");
-const arrow_right = document.querySelector(".arrow_right");
+const arrowLeft = document.querySelector(".arrow_left");
+const arrowRight = document.querySelector(".arrow_right");
 
 // Ecoute évènement lors du click sur les flèches
-arrow_left.addEventListener("click", (event) => {
+arrowLeft.addEventListener("click", (event) => {
   console.log("fleche gauche");
   // Si au click l'index est égale à zéro
   // Et que l'index de ma Slide actuel est infèrieur à l'index de ma dernière Slide
@@ -115,7 +115,7 @@ arrow_left.addEventListener("click", (event) => {
   dots[currentSlide].classList.add(`dot_selected`);
 });
 
-arrow_right.addEventListener("click", (event) => {
+arrowRight.addEventListener("click", (event) => {
   console.log("fleche droite");
   // Si l'index du slide actuel est égale à l'index de la dernière slide
   // et si l'index du slide actuel est supèrieur à zéro
