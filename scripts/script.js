@@ -29,31 +29,7 @@ let maxSlides = slides.length;
 
 let currentSlide = 0;
 
-// function qui met a jour l'image et le tag en fonction de l'index donner
-function updateSlide(index) {
-  // stock l'index
-  currentSlide = index;
-  // Stock la liste et son index en cours
-  const slide = slides[currentSlide];
-  //  MAJ image à afficher via directement la source
-  imageElement.src = `./assets/images/slideshow/${slide.image}`;
-  // Vérification du dot relatifs au bon slide
-  console.log(`Vous avez cliqué sur le dot qui représente le ${slide.image}`);
-  // Mets a jour le tagline
-  tagLineElement.innerHTML = slide.tagLine;
-  // console.log(`Et voici son tag:  ${tagLineElement.innerHTML}`)
-}
 
-function createDotCaroussel(liste) {
-  liste.forEach((slide) => {
-    // création d'un button
-    const dot = document.createElement("button");
-    // avec la class "".dot"
-    dot.classList.add(`dot`);
-    // il sera l'enfant de la div "dots" (qui est récupêrer dans cette variable)
-    dotsDiv.appendChild(dot);
-  });
-}
 // j'appelle la fonction qui créer le dot en joignant le nom de la liste
 createDotCaroussel(slides);
 
@@ -73,18 +49,7 @@ dots.forEach((dot, index) => {
     updateSlide(index);
   });
 });
-// une fonction qui enleve le style a l'élément qui n'est pas selectionner ou
-function removeStyleDot(liste, element) {
-  liste.forEach((element) => {
-    // supprimer la classe .dot_selected de tous les autres dots non selectionner
-    element.classList.remove(`dot_selected`);
-  });
-}
 
-function addStyleDot(element) {
-  // ajoute la class .dot_selected au dot cliqué
-  element.classList.add(`dot_selected`);
-}
 
 // Récupère les flèches
 const arrowLeft = document.querySelector(".arrow_left");
@@ -134,3 +99,48 @@ arrowRight.addEventListener("click", (event) => {
   dots[currentSlide].classList.add(`dot_selected`);
 });
 
+ /*********************
+  * 
+  * Fonction 
+  * 
+  * 
+  * ******************** */
+// function qui met a jour l'image et le tag en fonction de l'index donner
+function updateSlide(index) {
+  // stock l'index
+  currentSlide = index;
+  // Stock la liste et son index en cours
+  const slide = slides[currentSlide];
+  //  MAJ image à afficher via directement la source
+  imageElement.src = `./assets/images/slideshow/${slide.image}`;
+  // Vérification du dot relatifs au bon slide
+  console.log(`Vous avez cliqué sur le dot qui représente le ${slide.image}`);
+  // Mets a jour le tagline
+  tagLineElement.innerHTML = slide.tagLine;
+  // console.log(`Et voici son tag:  ${tagLineElement.innerHTML}`)
+}
+
+// Fonction qui créer des dots
+function createDotCaroussel(liste) {
+  liste.forEach((slide) => {
+    // création d'un button
+    const dot = document.createElement("button");
+    // avec la class "".dot"
+    dot.classList.add(`dot`);
+    // il sera l'enfant de la div "dots" (qui est récupêrer dans cette variable)
+    dotsDiv.appendChild(dot);
+  });
+}
+
+// une fonction qui enleve le style a l'élément qui n'est pas selectionner ou
+function removeStyleDot(liste, element) {
+  liste.forEach((element) => {
+    // supprimer la classe .dot_selected de tous les autres dots non selectionner
+    element.classList.remove(`dot_selected`);
+  });
+}
+
+function addStyleDot(element) {
+  // ajoute la class .dot_selected au dot cliqué
+  element.classList.add(`dot_selected`);
+}
