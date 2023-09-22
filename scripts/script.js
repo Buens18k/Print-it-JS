@@ -1,3 +1,4 @@
+// Tableau
 const slides = [
   {
     image: "slide1.jpg",
@@ -18,74 +19,52 @@ const slides = [
   },
 ];
 
-const imageElement = document.querySelector(`#banner .banner-img`);
-// console.log(imageElement);
-const tagLineElement = document.querySelector(`#banner p`);
-// console.log(tagLineElement);
+// Récupère les flèches
+const arrowLeft = document.querySelector(".arrow_left");
+const arrowRight = document.querySelector(".arrow_right");
 
+// Récupère l'image
+const imageElement = document.querySelector(`#banner .banner-img`);
+// Récupère le paragraphe (tagline)
+const tagLineElement = document.querySelector(`#banner p`);
+// Récupère le container des dot
 const dotsDiv = document.querySelector(".dots");
 
+// nombres de slides
 let maxSlides = slides.length;
-
+// l'index au chargement
 let currentSlide = 0;
 
-/********************
- * Etape 3
- * Ajoutez des bullet points au slider
- * 
- ********************/
-// j'appelle la fonction qui créer le dot en joignant le nom de la liste
+// Appelle la fonction qui créer le dot en joignant le nom du tableau
 createDotCaroussel(slides);
 
-/********************
- * 
- * Etape 4
- * Modifiez le slide au clic sur le bouton
- * 
- */
 // récupère tous les dots
 const dots = document.querySelectorAll(".dot");
 
 // j'applique le style au dot au chargement
 dots[currentSlide].classList.add(`dot_selected`);
-// console.log(`le slide au chargement est le ${currentSlide}`)
 
+// Pour chaque élément dans la liste
 dots.forEach((dot, index) => {
-  // quant on click sur le bouton dot
+  // ajout d'un écouteur d’événements à chaque élément "dot"
   dot.addEventListener("click", (event) => {
     // j'efface la class a tous les dot
     removeStyleDot(dots, dot);
     // puis je place le style au dot selectionner
     addStyleDot(dot);
-    // je mets à jour mon index (MAJ image et tags)
+    // MAJ le slide en fonction de l'index
     updateSlide(index);
+    // console.log(`Vous avez cliqué sur l'index: ${index}`)
   });
 });
-/*******************
- * Etape 2
- * Ajoutez des Event Listeners sur les flèches 
- * 
- *******************/
 
-// Récupère les flèches
-const arrowLeft = document.querySelector(".arrow_left");
-const arrowRight = document.querySelector(".arrow_right");
-
-/******************
- * 
- * Etape 5
- * Mettez en place le défilement infini sur le carrousel 
- * 
- */
-
-// Ecoute évènement lors du click sur les flèches
+// ajout d'un écouteur d’événements à l'élément "fleche gauche"
 arrowLeft.addEventListener("click", (event) => {
-  // test du fonctionnement lors de l'event listeners
+  // test du fonctionnement lorsque l’événement de clic se produit
   console.log("fleche gauche");
-  // Si au click l'index est égale à zéro
-  // Et que l'index de ma Slide actuel est infèrieur à l'index de ma dernière Slide
+  // condition pour tourner en boucle
   if (currentSlide === 0 && currentSlide < maxSlides - 1) {
-    // alors tu passe à la max-slide - 1 pour retrouver le bonne index
+    // MAJ image et tags
     updateSlide(maxSlides - 1);
     // test de fonctionnement
     console.log(
@@ -125,17 +104,18 @@ arrowRight.addEventListener("click", (event) => {
   dots[currentSlide].classList.add(`dot_selected`);
 });
 
- /*********************
-  * 
-  * Fonction 
-  * 
-  * 
-  * ******************** */
+/*********************
+ *
+ * Fonction
+ *
+ *
+ * ******************** */
+
 // function qui met a jour l'image et le tag en fonction de l'index donner
 function updateSlide(index) {
-  // stock l'index
+  // MAJ de l'index avec la valeur passez en parametre
   currentSlide = index;
-  // Stock la liste et son index en cours
+  // Stock la slide correspondant à son index en cours dans la variable
   const slide = slides[currentSlide];
   //  MAJ image à afficher via directement la source
   imageElement.src = `./assets/images/slideshow/${slide.image}`;
@@ -146,27 +126,30 @@ function updateSlide(index) {
   // console.log(`Et voici son tag:  ${tagLineElement.innerHTML}`)
 }
 
-// Fonction qui créer des dots
+// Fonction qui créer des dot pour chaque élément d’une liste
 function createDotCaroussel(liste) {
+  // Pour chaque élément dans la liste
   liste.forEach((slide) => {
     // création d'un button
     const dot = document.createElement("button");
-    // avec la class "".dot"
+    // avec la class ".dot"
     dot.classList.add(`dot`);
     // il sera l'enfant de la div "dots" (qui est récupêrer dans cette variable)
     dotsDiv.appendChild(dot);
   });
 }
 
-// une fonction qui enleve le style a l'élément qui n'est pas selectionner ou
+// une fonction qui enleve le style a l'élément qui n'est pas selectionner
 function removeStyleDot(liste, element) {
+  // Pour chaque élément dans la liste
   liste.forEach((element) => {
-    // supprimer la classe .dot_selected de tous les autres dots non selectionner
+    // supprime la classe CSS appelée “dot_selected” à chaque élément de la liste
     element.classList.remove(`dot_selected`);
   });
 }
 
+// Fonction qui ajoute un style
 function addStyleDot(element) {
-  // ajoute la class .dot_selected au dot cliqué
+  // ajoute la class .dot_selected à l'élément spécifié
   element.classList.add(`dot_selected`);
 }
