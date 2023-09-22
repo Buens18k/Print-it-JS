@@ -57,7 +57,7 @@ dots.forEach((dot, index) => {
     removeStyleDot(dots, dot);
     // puis je place le style au dot selectionner
     addStyleDot(dot);
-    // je mets à jour mon index
+    // je mets à jour mon index (MAJ image et tags)
     updateSlide(index);
   });
 });
