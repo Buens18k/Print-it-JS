@@ -119,7 +119,7 @@ function createDotCaroussel(liste) {
     const dot = document.createElement("button");
     // ajoute à l'élément la class ".dot"
     dot.classList.add(`dot`);
-    // Sera l'enfant de la div "dots" (qui est récupêrer dans cette variable)
+    // Sera l'enfant de la div "dots" 
     dotsDiv.appendChild(dot);
   });
 }
